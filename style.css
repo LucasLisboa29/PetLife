@@ -1,0 +1,194 @@
+/* PetLife — CSS compartilhado pelas quatro páginas.
+   As variáveis abaixo concentram as cores para facilitar alterações. */
+:root {
+    --verde: #214c3d;
+    --verde-escuro: #15382c;
+    --creme: #faf8f2;
+    --laranja: #f4b675;
+    --texto: #293e35;
+    --texto-suave: #58665e;
+    --borda: #dce3d9;
+}
+
+/* Base: padding e bordas entram na largura de cada elemento. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    background-color: var(--creme);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--verde); text-underline-offset: 4px; }
+a:hover { text-decoration: underline; }
+a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #ae5716; outline-offset: 5px; }
+h1, h2, h3 { color: var(--verde); line-height: 1.15; }
+h2 { margin: 0 0 24px; font-size: clamp(1.65rem, 3vw, 2.4rem); letter-spacing: -1px; }
+h3 { margin: 20px 0 12px; font-size: 1.35rem; }
+p { margin: 0 0 18px; }
+
+/* Cabeçalho e menu: flex organiza os itens em uma linha que pode quebrar. */
+body > header {
+    max-width: 1180px;
+    margin: auto;
+    padding: 26px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-bottom: 1px solid var(--borda);
+}
+header h1 { margin: 0; font-size: 2rem; letter-spacing: -1.5px; }
+nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; }
+nav a { font-size: .9rem; font-weight: bold; text-decoration: none; }
+header nav a { padding: 8px 0; }
+header nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; }
+header nav a:last-child {
+    padding: 10px 24px;
+    background-color: var(--verde);
+    color: white;
+    border-radius: 30px;
+}
+header nav a:last-child:hover { background-color: var(--verde-escuro); }
+
+/* Conteúdo centralizado, com respiro entre as seções. */
+main { max-width: 1180px; margin: auto; padding: 0 30px 70px; }
+main > section { padding: 54px 0; scroll-margin-top: 24px; }
+main > section + section { border-top: 1px solid var(--borda); }
+
+/* Destaque inicial: texto à esquerda e fotografia à direita. */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
+    column-gap: 56px;
+    align-items: start;
+}
+.hero > h1, .hero > h2 {
+    grid-column: 1;
+    margin: 16px 0 24px;
+    font-size: clamp(2.4rem, 4.6vw, 3.9rem);
+    letter-spacing: -2px;
+}
+.hero > p { grid-column: 1; color: var(--texto-suave); font-size: 1.1rem; }
+.hero > img {
+    grid-column: 2;
+    grid-row: 1 / 5;
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 90px 24px 90px 24px;
+}
+.hero > p:last-child a, .chamada > a, article > a, button {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 0;
+    border-radius: 30px;
+    background-color: var(--verde);
+    color: white;
+    font: inherit;
+    font-size: .95rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+.hero > p:last-child a { margin-top: 12px; background-color: var(--laranja); color: var(--verde-escuro); }
+.hero > p:last-child a:hover { background-color: #edaa64; }
+.chamada > a:hover, article > a:hover, button:hover { background-color: var(--verde-escuro); }
+
+/* Cards: cada article é um serviço ou pet; o título ocupa a linha toda. */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.cards > h2 { grid-column: 1 / -1; margin-bottom: 6px; }
+.cards-quatro { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+article {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 22px;
+    background-color: white;
+    border: 1px solid var(--borda);
+    border-radius: 22px;
+}
+article > img { width: 100%; height: 210px; object-fit: cover; border-radius: 14px; }
+article > p { color: var(--texto-suave); }
+article > a { margin-top: auto; }
+.cards-quatro article { border-top: 4px solid var(--laranja); }
+.cards-quatro h3 { margin-top: 4px; }
+
+/* Tabelas: cabeçalho verde, linhas alternadas e valores bem alinhados. */
+table { width: 100%; border-collapse: collapse; background-color: white; font-size: .95rem; }
+th, td { padding: 18px 22px; border-bottom: 1px solid var(--borda); text-align: left; }
+thead { background-color: var(--verde); color: white; }
+tbody tr:nth-child(even) { background-color: #eef2e9; }
+tbody tr:hover { background-color: #e3ecdc; }
+
+/* Formulários: labels acima dos campos e duas colunas no computador. */
+#contato, #formulario { padding: 36px; background-color: #edf1e7; border-radius: 26px; }
+form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+form p { min-width: 0; margin: 0; }
+form p:last-of-type { grid-column: 1 / -1; }
+label { display: block; margin-bottom: 7px; font-size: .9rem; font-weight: bold; }
+input, select, textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #9eafa0;
+    border-radius: 10px;
+    background-color: white;
+    color: var(--texto);
+    font: inherit;
+}
+textarea { min-height: 130px; resize: vertical; }
+form br { display: none; }
+form button { justify-self: start; min-width: 140px; }
+
+/* Chamadas e rodapé seguem a mesma identidade visual. */
+.chamada { text-align: center; }
+ul { padding-left: 24px; }
+li { margin-bottom: 10px; }
+li::marker { color: var(--verde); }
+body > footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 38px max(30px, calc((100% - 1120px) / 2));
+    background-color: var(--verde-escuro);
+    color: white;
+}
+footer p { margin: 0; font-size: 1.75rem; letter-spacing: -1px; }
+footer a { color: white; }
+
+/* Responsividade: reorganiza o conteúdo para tablets e celulares. */
+@media (max-width: 900px) {
+    body > header { flex-direction: column; align-items: flex-start; }
+    .hero { column-gap: 28px; }
+    .hero > img { height: 360px; }
+    .cards-quatro { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+    body > header { padding: 22px 20px; gap: 18px; }
+    nav { gap: 10px 18px; }
+    header nav a:last-child { padding: 8px 18px; }
+    main { padding: 0 20px 40px; }
+    main > section { padding: 36px 0; }
+    .hero { display: flex; flex-direction: column; gap: 8px; }
+    .hero > h1, .hero > h2 { font-size: 2.5rem; letter-spacing: -1.3px; }
+    .hero > img { height: auto; max-height: 360px; border-radius: 50px 18px; }
+    .cards, .cards-quatro, form { grid-template-columns: 1fr; }
+    article > img { height: auto; max-height: 320px; }
+    #contato, #formulario { padding: 26px 18px; }
+    th, td { padding: 12px 7px; font-size: .8rem; overflow-wrap: anywhere; }
+    body > footer { padding: 30px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    a, button { transition: none; }
+}
